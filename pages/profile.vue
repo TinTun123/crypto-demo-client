@@ -8,11 +8,6 @@
                         <path class="dark:fill-[var(--text-dark)] fill-[var(--secondary-dark)]" fill-rule="evenodd" clip-rule="evenodd" d="M5 4C5 2.93913 5.42143 1.92172 6.17157 1.17157C6.92172 0.421427 7.93913 0 9 0C10.0609 0 11.0783 0.421427 11.8284 1.17157C12.5786 1.92172 13 2.93913 13 4C13 5.06087 12.5786 6.07828 11.8284 6.82843C11.0783 7.57857 10.0609 8 9 8C7.93913 8 6.92172 7.57857 6.17157 6.82843C5.42143 6.07828 5 5.06087 5 4ZM5 10C3.67392 10 2.40215 10.5268 1.46447 11.4645C0.526784 12.4021 0 13.6739 0 15C0 15.7956 0.316071 16.5587 0.87868 17.1213C1.44129 17.6839 2.20435 18 3 18H15C15.7956 18 16.5587 17.6839 17.1213 17.1213C17.6839 16.5587 18 15.7956 18 15C18 13.6739 17.4732 12.4021 16.5355 11.4645C15.5979 10.5268 14.3261 10 13 10H5Z"/>
                     </svg>
 
-                    <!-- <svg
-                        class="dark:fill-[var(--text-dark)] fill-[var(--secondary-dark)]"
-                        width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M11.3373 0C10.2847 0.000943511 9.24723 0.250731 8.30962 0.728967C7.37201 1.2072 6.56083 1.90033 5.94232 2.75175C5.32381 3.60318 4.9155 4.58876 4.75073 5.62803C4.58596 6.6673 4.66941 7.73079 4.99425 8.73167L0.195068 13.5283C0.133157 13.5903 0.0840641 13.6638 0.0505936 13.7448C0.0171232 13.8257 -6.86813e-05 13.9124 2.06204e-07 14V17.3333C2.06204e-07 17.5101 0.0702627 17.6797 0.195331 17.8047C0.320399 17.9298 0.490027 18 0.6669 18H4.0014C4.17827 18 4.3479 17.9298 4.47297 17.8047C4.59804 17.6797 4.6683 17.5101 4.6683 17.3333V16H6.0021C6.17897 16 6.3486 15.9298 6.47367 15.8047C6.59874 15.6797 6.669 15.5101 6.669 15.3333V14H8.0028C8.09041 14.0001 8.17717 13.9829 8.25812 13.9494C8.33908 13.916 8.41265 13.8669 8.47463 13.805L9.27158 13.0075C10.1882 13.305 11.1584 13.4004 12.1154 13.2871C13.0724 13.1738 13.9934 12.8545 14.8151 12.3512C15.6369 11.8479 16.3397 11.1725 16.8753 10.3717C17.4108 9.57077 17.7664 8.66337 17.9175 7.71194C18.0686 6.7605 18.0116 5.78763 17.7505 4.86031C17.4894 3.933 17.0304 3.07327 16.405 2.34032C15.7796 1.60737 15.0027 1.01862 14.1279 0.614608C13.253 0.210593 12.301 0.000910591 11.3373 0ZM13.0046 6.33333C12.7408 6.33333 12.4829 6.25513 12.2635 6.10863C12.0442 5.96212 11.8732 5.75388 11.7723 5.51024C11.6713 5.26661 11.6449 4.99852 11.6964 4.73988C11.7478 4.48124 11.8749 4.24366 12.0614 4.05719C12.2479 3.87072 12.4856 3.74373 12.7443 3.69229C13.0031 3.64084 13.2713 3.66724 13.515 3.76816C13.7587 3.86908 13.967 4.03997 14.1136 4.25924C14.2601 4.47851 14.3384 4.73629 14.3384 5C14.3384 5.35362 14.1978 5.69276 13.9477 5.94281C13.6976 6.19286 13.3583 6.33333 13.0046 6.33333Z" />
-                    </svg> -->
                 </div>
                 <!-- text-[var(--theme-sed-02)] -->
                 <span class=" text-[20px] font-[500] dark:text-[var(--text-dark)] text-[var(--secondary-dark)] transition">
@@ -21,7 +16,7 @@
             </div>
 
             <div class="p-[30px] relative bg-white dark:bg-[var(--secondary-dark)] lg-tablet:flex lg-tablet:items-start lg-tablet:gap-x-4 laptop:gap-x-[30px] laptop:items-start rounded-[15px] overflow-hidden">
-                <div class="absolute rounded-full flex items-center justify-center px-4 py-1 gap-x-2 right-0 top-0  rounded-r-[16px] overflow-hidden transition-colors" :class="[themeStore.isgrad ? 'bg-[var(--theme-from)]' : 'bg-[var(--theme-color)]']">
+                <div v-if="auth.userObj.isVerified" class="absolute rounded-full flex items-center justify-center px-4 py-1 gap-x-2 right-0 top-0  rounded-r-[16px] overflow-hidden transition-colors" :class="[themeStore.isgrad ? 'bg-[var(--theme-from)]' : 'bg-[var(--theme-color)]']">
 
                     <span class="text-white text-[16px] font-[500]" >
                         Verified
@@ -37,9 +32,11 @@
                 </div>
 
                 <div class="w-[200px] lg-tablet:w-[140px] laptop:w-[200px] laptop:h-[200px] lg-tablet:h-[140px] aspect-square mx-auto rounded-full mb-[15px] relative">
-                    <img src="/profile_female.jpg" class="w-full h-full rounded-full" alt="">
+                    <img :src="profileImage" class="w-full h-full rounded-full" alt="">
 
-                    <div class="absolute bottom-0 right-0">
+                    <input hidden ref="profileRef" @change="onFileSelected" id="profile_img" type="file" name="img">
+
+                    <div id="profileImg" @click="openFile('profile')" class="absolute bottom-0 right-0">
                         <svg  width="45" height="45" viewBox="0 0 45 45" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <rect x="1.5" y="1.5" width="42" height="42" rx="21" class="fill-[var(--theme-color)] transition-colors"/>
                             <path fill-rule="evenodd" clip-rule="evenodd" d="M20.4446 31.5H24.5554C27.4423 31.5 28.8862 31.5 29.9231 30.765C30.3705 30.448 30.7559 30.0389 31.0572 29.561C31.75 28.461 31.75 26.928 31.75 23.864C31.75 20.799 31.75 19.267 31.0572 18.167C30.7559 17.6891 30.3706 17.28 29.9231 16.963C29.2571 16.49 28.4228 16.321 27.1453 16.261C26.5358 16.261 26.0113 15.771 25.892 15.136C25.8008 14.6709 25.5638 14.2541 25.2212 13.956C24.8786 13.6579 24.4512 13.4969 24.0114 13.5H20.9886C20.0747 13.5 19.2875 14.185 19.108 15.136C18.9887 15.771 18.4642 16.261 17.8547 16.261C16.5782 16.321 15.7438 16.491 15.0769 16.963C14.6297 17.2801 14.2447 17.6892 13.9438 18.167C13.25 19.267 13.25 20.799 13.25 23.864C13.25 26.928 13.25 28.46 13.9428 29.561C14.2425 30.037 14.6273 30.446 15.0769 30.765C16.1138 31.5 17.5577 31.5 20.4446 31.5ZM22.5 19.773C20.3716 19.773 18.6455 21.604 18.6455 23.863C18.6455 26.123 20.3716 27.954 22.5 27.954C24.6284 27.954 26.3545 26.123 26.3545 23.864C26.3545 21.604 24.6284 19.773 22.5 19.773ZM22.5 21.409C21.2235 21.409 20.1875 22.508 20.1875 23.864C20.1875 25.219 21.2235 26.318 22.5 26.318C23.7765 26.318 24.8125 25.219 24.8125 23.864C24.8125 22.508 23.7765 21.409 22.5 21.409ZM26.8679 20.591C26.8679 20.139 27.2129 19.773 27.6393 19.773H28.6661C29.0916 19.773 29.4375 20.139 29.4375 20.591C29.4355 20.8099 29.3533 21.019 29.2088 21.1724C29.0643 21.3258 28.8695 21.4109 28.667 21.409H27.6393C27.539 21.4101 27.4394 21.3898 27.3463 21.3492C27.2533 21.3087 27.1685 21.2487 27.0969 21.1728C27.0252 21.0968 26.9681 21.0063 26.9288 20.9065C26.8895 20.8067 26.8688 20.6995 26.8679 20.591Z" fill="white"/>
@@ -54,30 +51,30 @@
                 <div class="laptop:flex-1">
                     <div class="flex flex-wrap justify-between lg-phone:grid lg-phone:grid-cols-2 gap-4 mb-4">
                         <div class="w-full lg-phone:w-auto lg-phone:col-span-1">
-                            <TextInput :placeholder="'FirstName'" :inputType="'text'" :disable="false" :value="''" :label="'First Name'"/>
+                            <TextInput v-model:input="proUpdateForm.firstName" :placeholder="'FirstName'" :inputType="'text'" :disable="false" :label="'First Name'"/>
                         </div>
 
 
                         <div class="w-full lg-phone:w-auto lg-phone:col-span-1">
-                            <TextInput :placeholder="'LastName'" :inputType="'text'" :disable="false" :value="''" :label="'Last Name'"/>
+                            <TextInput v-model:input="proUpdateForm.lastName" :placeholder="'LastName'" :inputType="'text'" :disable="false" :label="'Last Name'"/>
                         </div>
 
                         <div class="w-full lg-phone:w-auto lg-phone:col-span-1">
-                            <TextInput :placeholder="'jamescollin1992@gmail.com'" :inputType="'text'" :disable="true" :value="''" :label="'Email'"/>
+                            <TextInput :placeholder="auth.userObj.email" :inputType="'text'" :disable="true" :label="'Email'"/>
                         </div>
 
                         <div class="w-full lg-phone:w-auto lg-phone:col-span-1">
-                            <TextInput :placeholder="'Phone'" :inputType="'text'" :disable="false" :value="''" :label="'Phone'"/>
+                            <TextInput v-model:input="proUpdateForm.phone_number" :placeholder="'Phone'" :inputType="'text'" :disable="false"  :label="'Phone'"/>
                         </div>
 
                         <div class="w-full lg-phone:w-auto lg-phone:col-span-1">
-                            <TextInput :placeholder="'Address'" :inputType="'text'" :disable="false" :value="''" :label="'Address'"/>
+                            <TextInput v-model:input="proUpdateForm.address" :placeholder="'Address'" :inputType="'text'" :disable="false" :label="'Address'"/>
                         </div>
 
                         <div class="w-full lg-phone:w-auto lg-phone:col-span-1 flex items-center">
                             <div class="flex flex-col gap-y-1 items-stretch flex-1">
                                 <label class="dark:text-[var(--text-dark)] text-[#444444] text-[15px]" for="bd-date">Date of Birth</label>
-                                <input type="date" id="bg-date" class="bg-white dark:bg-[var(--teriary-dark)] text-[#444444] dark:text-[var(--text-dark)] border-[#eeeeee] dark:border-none dark:shadow-none rounded-[4px] shadow-input-sha border text-[15px] p-[15px] placeholder-gray-500 focus:outline-none">
+                                <input v-model="proUpdateForm.birthday" type="date" id="bg-date" class="bg-white dark:bg-[var(--teriary-dark)] text-[#444444] dark:text-[var(--text-dark)] border-[#eeeeee] dark:border-none dark:shadow-none rounded-[4px] shadow-input-sha border text-[15px] p-[15px] placeholder-gray-500 focus:outline-none">
                             </div>
                         </div>
 
@@ -86,18 +83,18 @@
                             <!-- front id card -->
                             <div class="flex flex-col gap-y-1 items-stretch flex-1">
                                 <label class="dark:text-[var(--text-dark)] text-[#444444] text-[15px]" for="bd-date">ID Card front</label>
-                                <div  @click="openFile" 
+                                <div  @click="openFile('id_front')" 
                                 class="bg-white cursor-pointer  transition overflow-hidden group dark:bg-[var(--teriary-dark)] text-[#444444] dark:text-[var(--text-dark)] border-[#eeeeee] dark:border-none dark:shadow-none rounded-[4px] shadow-input-sha border text-[15px] p-[15px] placeholder-gray-500 focus:outline-none">
                                     
 
-                                    <div :style="{'background-image' : `URL(${coverImg})`}" class="img_block aspect-square flex justify-center items-center">
+                                    <div :style="{'background-image' : `URL(${id_front})`}" class="img_block aspect-square flex justify-center items-center">
 
-                                        <svg v-if="!coverImg"  class="w-16 h-16" viewBox="0 0 24 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <svg v-if="!id_front"  class="w-16 h-16" viewBox="0 0 24 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                                             <path class="fill-[#CCCCCC] group-hover:fill-[#CCCCCC]/80 group-active:fill-[#CCCCCC]" d="M21.6 0H2.4C1.0764 0 0 1.0764 0 2.4V16.8C0 18.1236 1.0764 19.2 2.4 19.2H21.6C22.9236 19.2 24 18.1236 24 16.8V2.4C24 1.0764 22.9236 0 21.6 0ZM5.4 3.6C5.87739 3.6 6.33523 3.78964 6.67279 4.12721C7.01036 4.46477 7.2 4.92261 7.2 5.4C7.2 5.87739 7.01036 6.33523 6.67279 6.67279C6.33523 7.01036 5.87739 7.2 5.4 7.2C4.92261 7.2 4.46477 7.01036 4.12721 6.67279C3.78964 6.33523 3.6 5.87739 3.6 5.4C3.6 4.92261 3.78964 4.46477 4.12721 4.12721C4.46477 3.78964 4.92261 3.6 5.4 3.6ZM12 15.6H3.6L8.4 9.6L10.2 12L13.8 7.2L20.4 15.6H12Z"/>
                                         </svg>
                                     </div>
 
-                                    <input hidden ref="imgInput" @change="onFileSelected" type="file" name="img" id="img">
+                                    <input hidden ref="id_frontRef" @change="onFileSelected" id="front" type="file" name="img">
 
                                 </div>
                             </div>
@@ -107,24 +104,37 @@
                             <!-- id card back -->
                             <div class="flex flex-col gap-y-1 items-stretch flex-1">
                                 <label class="dark:text-[var(--text-dark)] text-[#444444] text-[15px]" for="bd-date">ID Card back</label>
-                                <div  @click="openFile" 
+                                <div  @click="openFile('id_back')" 
                                 class="bg-white cursor-pointer  transition overflow-hidden group dark:bg-[var(--teriary-dark)] text-[#444444] dark:text-[var(--text-dark)] border-[#eeeeee] dark:border-none dark:shadow-none rounded-[4px] shadow-input-sha border text-[15px] p-[15px] placeholder-gray-500 focus:outline-none">
                                     
 
-                                    <div :style="{'background-image' : `URL(${coverImg})`}" class="img_block w-full aspect-square flex justify-center items-center">
+                                    <div :style="{'background-image' : `URL(${id_back})`}" class="img_block w-full aspect-square flex justify-center items-center">
 
-                                        <svg v-if="!coverImg"  class="w-16 h-16" viewBox="0 0 24 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <svg v-if="!id_back"  class="w-16 h-16" viewBox="0 0 24 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                                             <path class="fill-[#CCCCCC] group-hover:fill-[#CCCCCC]/80 group-active:fill-[#CCCCCC]" d="M21.6 0H2.4C1.0764 0 0 1.0764 0 2.4V16.8C0 18.1236 1.0764 19.2 2.4 19.2H21.6C22.9236 19.2 24 18.1236 24 16.8V2.4C24 1.0764 22.9236 0 21.6 0ZM5.4 3.6C5.87739 3.6 6.33523 3.78964 6.67279 4.12721C7.01036 4.46477 7.2 4.92261 7.2 5.4C7.2 5.87739 7.01036 6.33523 6.67279 6.67279C6.33523 7.01036 5.87739 7.2 5.4 7.2C4.92261 7.2 4.46477 7.01036 4.12721 6.67279C3.78964 6.33523 3.6 5.87739 3.6 5.4C3.6 4.92261 3.78964 4.46477 4.12721 4.12721C4.46477 3.78964 4.92261 3.6 5.4 3.6ZM12 15.6H3.6L8.4 9.6L10.2 12L13.8 7.2L20.4 15.6H12Z"/>
                                         </svg>
                                     </div>
 
-                                    <input hidden ref="imgInput" @change="onFileSelected" type="file" name="img" id="img">
+                                    <input hidden ref="id_backRef" @change="onFileSelected" id="back" type="file" name="img">
 
                                 </div>
                             </div>
                         </div>  
                     </div>
-                    <button :class="[themeStore.isgrad ? 'bg-[var(--theme-from)]' : 'bg-[var(--theme-color)]']" class="text-[15px] text-white font-[600] rounded-[4px] transition-colors px-[30px] py-[12px] inline-block">Save</button>
+                    <button @click.stop="update" :class="[themeStore.isgrad ? 'bg-[var(--theme-from)]' : 'bg-[var(--theme-color)]']" class="text-[15px] text-white font-[600] rounded-[4px] transition-colors px-[30px] py-[12px] inline-block">
+                        <div v-if="isproLoading" class="flex justify-center items-center gap-x-4">
+                            <span class="spinner-container">
+                                <svg width="17" height="17" viewBox="0 0 17 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M16.9854 8.98286C16.9661 7.90692 16.7346 6.84536 16.304 5.85914C15.8734 4.87291 15.2523 3.98146 14.4762 3.23594C13.3334 2.1315 11.8883 1.39125 10.3242 1.10901C8.76017 0.826778 7.14752 1.01526 5.6907 1.65058C4.73804 2.0686 3.87621 2.67446 3.16301 3.4176C2.4498 4.16073 1.88626 5.04218 1.51469 5.99484C0.769867 7.90847 0.812538 10.0391 1.63338 11.9214C2.03798 12.842 2.62526 13.676 3.34466 14.3654C4.06406 15.0549 4.9166 15.5988 5.8383 15.958C6.75854 16.3156 7.7402 16.4885 8.72724 16.4669C10.1883 16.4386 11.6081 15.9776 12.8071 15.1422C14.0061 14.3068 14.9303 13.1345 15.463 11.7738C15.6724 11.2349 15.8162 10.6728 15.8913 10.0996L15.9522 10.1017C16.0949 10.1016 16.236 10.0719 16.3667 10.0145C16.4974 9.95715 16.6147 9.87329 16.7113 9.76824C16.8079 9.6632 16.8817 9.53926 16.928 9.40425C16.9743 9.26925 16.992 9.12612 16.9802 8.9839H16.9843L16.9854 8.98286ZM15.3453 11.7232C14.9665 12.5809 14.4184 13.3581 13.7455 14.0001C13.0725 14.6421 12.2778 15.1478 11.4191 15.4802C10.5614 15.8122 9.64663 15.9715 8.72724 15.9487C7.82064 15.9291 6.92682 15.7308 6.09703 15.365C5.26724 14.9993 4.5178 14.4734 3.89169 13.8174C3.27424 13.1706 2.79025 12.4084 2.46735 11.5746C1.82584 9.91423 1.8689 8.06728 2.58708 6.43865C2.94007 5.64391 3.44994 4.92348 4.07438 4.32897C4.69882 3.73446 5.43783 3.2669 6.23361 2.96036C7.02938 2.65278 7.88089 2.50829 8.72724 2.53099C9.57359 2.5537 10.4086 2.73948 11.1713 3.08009C11.9351 3.41966 12.6266 3.91096 13.1974 4.51166C13.7682 5.11236 14.2172 5.82247 14.5103 6.58728C14.8031 7.35073 14.9424 8.16446 14.9201 8.98183H14.9242C14.9019 9.25004 14.9852 9.51636 15.1564 9.72401C15.3276 9.93166 15.5732 10.0642 15.8407 10.0934C15.7412 10.6543 15.5745 11.2012 15.3443 11.7221L15.3453 11.7232Z" fill="#ffffff"/>
+                                </svg>
+                            </span>
+                            <span>
+                                Saving
+                            </span>
+                        </div>
+                        <span v-else>Save</span>
+                        
+                    </button>
                 </div>
 
 
@@ -147,26 +157,74 @@
             <div class="p-[30px] bg-white dark:bg-[var(--secondary-dark)] lg-tablet:flex lg-tablet:items-center lg-tablet:gap-x-4 laptop:gap-x-[30px] rounded-[15px] mb-16">
                 <div class="flex flex-wrap justify-between lg-phone:grid lg-phone:grid-cols-2 laptop:w-full laptop:grid-cols-3 gap-4 mb-4">
                     <div class="w-full lg-phone:w-auto lg-phone:col-span-1">
-                        <TextInput :placeholder="'New password'" :inputType="'password'" :label="'New Password'"/>
+                        <TextInput :placeholder="'New password'" v-model:input="updatePwdForm.password" :inputType="'password'" :label="'New Password'"/>
                     </div>
 
                     <div class="w-full lg-phone:w-auto lg-phone:col-span-1">
-                        <TextInput :placeholder="'Confirm password'" :inputType="'password'" :label="'Confirm password'"/>
+                        <TextInput :placeholder="'Confirm password'" v-model:input="updatePwdForm.password_confirmation" :inputType="'password'" :label="'Confirm password'"/>
                     </div>
 
                     <div class="laptop:flex laptop:justify-center laptop:items-end">
-                        <button :class="[themeStore.isgrad ? 'bg-[var(--theme-from)]' : 'bg-[var(--theme-color)]']" class="text-[15px] text-white font-[600] rounded-[4px] transition-colors px-[30px] py-[12px] laptop:h-[53px] inline-block">Save</button>
+                        <button @click.stop="updatePwd" :class="[themeStore.isgrad ? 'bg-[var(--theme-from)]' : 'bg-[var(--theme-color)]']" class="text-[15px] text-white font-[600] rounded-[4px] transition-colors px-[30px] py-[12px] laptop:h-[53px] inline-block">
+                            <div v-if="ispwdLoading" class="flex justify-center items-center gap-x-4">
+                                <span class="spinner-container">
+                                    <svg width="17" height="17" viewBox="0 0 17 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M16.9854 8.98286C16.9661 7.90692 16.7346 6.84536 16.304 5.85914C15.8734 4.87291 15.2523 3.98146 14.4762 3.23594C13.3334 2.1315 11.8883 1.39125 10.3242 1.10901C8.76017 0.826778 7.14752 1.01526 5.6907 1.65058C4.73804 2.0686 3.87621 2.67446 3.16301 3.4176C2.4498 4.16073 1.88626 5.04218 1.51469 5.99484C0.769867 7.90847 0.812538 10.0391 1.63338 11.9214C2.03798 12.842 2.62526 13.676 3.34466 14.3654C4.06406 15.0549 4.9166 15.5988 5.8383 15.958C6.75854 16.3156 7.7402 16.4885 8.72724 16.4669C10.1883 16.4386 11.6081 15.9776 12.8071 15.1422C14.0061 14.3068 14.9303 13.1345 15.463 11.7738C15.6724 11.2349 15.8162 10.6728 15.8913 10.0996L15.9522 10.1017C16.0949 10.1016 16.236 10.0719 16.3667 10.0145C16.4974 9.95715 16.6147 9.87329 16.7113 9.76824C16.8079 9.6632 16.8817 9.53926 16.928 9.40425C16.9743 9.26925 16.992 9.12612 16.9802 8.9839H16.9843L16.9854 8.98286ZM15.3453 11.7232C14.9665 12.5809 14.4184 13.3581 13.7455 14.0001C13.0725 14.6421 12.2778 15.1478 11.4191 15.4802C10.5614 15.8122 9.64663 15.9715 8.72724 15.9487C7.82064 15.9291 6.92682 15.7308 6.09703 15.365C5.26724 14.9993 4.5178 14.4734 3.89169 13.8174C3.27424 13.1706 2.79025 12.4084 2.46735 11.5746C1.82584 9.91423 1.8689 8.06728 2.58708 6.43865C2.94007 5.64391 3.44994 4.92348 4.07438 4.32897C4.69882 3.73446 5.43783 3.2669 6.23361 2.96036C7.02938 2.65278 7.88089 2.50829 8.72724 2.53099C9.57359 2.5537 10.4086 2.73948 11.1713 3.08009C11.9351 3.41966 12.6266 3.91096 13.1974 4.51166C13.7682 5.11236 14.2172 5.82247 14.5103 6.58728C14.8031 7.35073 14.9424 8.16446 14.9201 8.98183H14.9242C14.9019 9.25004 14.9852 9.51636 15.1564 9.72401C15.3276 9.93166 15.5732 10.0642 15.8407 10.0934C15.7412 10.6543 15.5745 11.2012 15.3443 11.7221L15.3453 11.7232Z" fill="#ffffff"/>
+                                    </svg>
+                                </span>
+                                <span>
+                                    Saving
+                                </span>
+                            </div>
+                            <span v-else>Save</span>
+                            
+                        </button>
                     </div>
 
                 </div>
             </div>
         </div>
+
+        <Teleport to="body">
+            <transition name="modal">
+            
+                <div v-if="reserror.msg" class="modal-mask">
+                    <div class="modal-container tablet:w-[60%] laptop:w-[40%] rounded-[15px] overflow-hidden relative">
+                        <div @click.stop="openErrBox = !openErrBox; reserror = {}" class="absolute top-2 right-2">
+                            <svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path class="dark:fill-[var(--light-bg)] laptop:cursor-pointer fill-[var(--secondary-dark)]" d="M12.2402 0.240234C9.05764 0.240234 6.00539 1.50452 3.75495 3.75495C1.50452 6.00539 0.240234 9.05764 0.240234 12.2402C0.240234 15.4228 1.50452 18.4751 3.75495 20.7255C6.00539 22.976 9.05764 24.2402 12.2402 24.2402C15.4228 24.2402 18.4751 22.976 20.7255 20.7255C22.976 18.4751 24.2402 15.4228 24.2402 12.2402C24.2402 9.05764 22.976 6.00539 20.7255 3.75495C18.4751 1.50452 15.4228 0.240234 12.2402 0.240234ZM19.0817 16.6131L16.6117 19.0831L12.2402 14.7102L7.86738 19.0817L5.39738 16.6117L9.77166 12.2402L5.39881 7.86738L7.86881 5.39881L12.2402 9.77023L16.6131 5.39738L19.0831 7.86738L14.7088 12.2402L19.0817 16.6131Z"/>
+                            </svg>
+                        </div>
+
+                        <div class="p-[6] tablet:p-[30px] bg-white dark:bg-[var(--secondary-dark)]">
+                            <div class="flex flex-col items-start gap-x-4">
+                                <h1 class="text-[20px] text-[#444444] dark:text-[--text-dark] font-[500]">Sorry!</h1>
+                                <span :class="[themeStore.isgrad ? 'text-[var(--theme-from)]' : 'text-[var(--theme-color)]']" class="text-[16px] font-[500]">Following errors occured. Please try again!</span>
+                            </div>
+                            
+                            <ul>
+                                <li v-for="(messagesArr, field) in reserror.errors" :key="field">
+                                    <ol class="list-style">
+                                        <li v-for="(error, i) in messagesArr" :key="i" class="text-[14px] text-red-300 font-[500]">
+                                            {{ error }}
+                                        </li>
+                                    </ol>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>                
+            </transition>
+
+        </Teleport>	
     </mainLayout>
 </template>
 
 <script setup>
 import  mainLayout  from '../layouts/mainLayout';
 import { useThemeStore } from '../store/useThemeStore';
+import { useAuthStore } from '../store/useAuthStore';
+import { useNotiStore } from '../store/usenotificationStore';
 
 definePageMeta({
   
@@ -174,32 +232,235 @@ definePageMeta({
 
 });
 
+const auth = useAuthStore();
+const notiStore = useNotiStore();
+const openErrBox = ref(false);
+const profileRef = ref(null);
+const id_frontRef = ref(null);
+const id_backRef = ref(null);
+
+const reserror = ref({
+    msg : '',
+    errors : ''
+});
 
 const themeStore = useThemeStore();
 
-const coverImg = ref('');
+const profileImage = ref('/profile_female.jpg');
+const id_back = ref('');
+const id_front = ref('');
+
+const isproLoading = ref(false);
+const ispwdLoading = ref(false);
+
 const imgInput = ref(null);
 const imgfront = ref('');
 
-function openFile() {
-    imgInput.value.click();
+const updatePwdForm = ref({
+    password : '',
+    password_confirmation : ''
+});
+
+const proUpdateForm = ref({
+    firstName : "",
+    lastName : "",
+    email : "",
+    address : "",
+    phone_number : "",
+    country : "",
+    birthday : "",
+    id_front : "",
+    id_back : "",
+    profile_img : ""
+})
+
+onMounted(async () => {
+    await auth.getUser(auth.user.id);
+
+    proUpdateForm.value = {
+        firstName : auth.userObj.firstName,
+        lastName : auth.userObj.lastName,
+        email : auth.userObj.email,
+        address : auth.userObj.address,
+        phone_number : auth.userObj.phone_number,
+        country : auth.userObj.country,
+        birthday : auth.userObj.birthdat,
+    }
+
+    profileImage.value = auth.userObj.profile_img;
+    id_front.value = auth.userObj.id_card;
+    id_back.value = auth.userObj.id_back;
+
+})
+
+function openFile(type) {
+
+    if (type === 'profile') {
+
+        profileRef.value.click();
+
+    } else if (type === 'id_front') {
+
+        if (auth.userObj.isVerified) {
+            notiStore.showNoti('Verified user can not change ID Image.', 'error');
+            return;
+        } else {
+            id_frontRef.value.click();
+        }
+
+
+    } else if (type === 'id_back') {
+
+        if (auth.userObj.isVerified) {
+            notiStore.showNoti('Verified user can not change ID Image.', 'error');
+            return;
+        } else {
+            id_backRef.value.click();
+        }
+
+
+    }
 }
 
-function onFileSelected(e) {
-    const files = e.target.files;
+function onFileSelected(event) {
+    const files = event.target.files;
+    
     if (files.length) {
         const reader = new FileReader();
 
         reader.onload = (e) => {
-            
-            coverImg.value = e.target.result;
-            console.log(coverImg.value);
+            console.log(event.target.id);
+            if (event.target.id === 'front') {
+
+                id_front.value = e.target.result;
+
+            } else if (event.target.id === 'back') {
+
+                id_back.value = e.target.result;
+
+            } else if (event.target.id === 'profile_img') {
+
+                profileImage.value = e.target.result;
+
+            }
+
             
         }
         reader.readAsDataURL(files[0]);
-        imgfront.value = files[0];
+
+        if (event.target.id === 'front') {
+            console.log('id_front assign:');
+                proUpdateForm.value.id_front = files[0];
+
+            } else if (event.target.id === 'back') {
+                console.log('id_back assign:');
+                proUpdateForm.value.id_back = files[0];
+
+            } else if (event.target.id === 'profile_img') {
+                console.log('profileImg:');
+                proUpdateForm.value.profile_img = files[0];
+
+            }
+
+            // console.log(proUpdateForm.value);
     }
 }
+
+
+
+
+async function update() {
+
+    isproLoading.value = true;
+
+
+    const formdata = new FormData();
+    
+    if (proUpdateForm.value.firstName) {
+        formdata.append('firstName', proUpdateForm.value.firstName);
+    }
+
+    if (proUpdateForm.value.lastName) {
+        formdata.append('lastName', proUpdateForm.value.lastName);
+    }
+
+    if(proUpdateForm.value.profile_img) {
+        formdata.append('profile_image', proUpdateForm.value.profile_img);
+    }
+
+    if (proUpdateForm.value.id_front) {
+        formdata.append('id_front', proUpdateForm.value.id_front);
+    }
+
+    if (proUpdateForm.value.id_back) {
+        formdata.append('id_back', proUpdateForm.value.id_back);
+    }
+
+    if(proUpdateForm.value.address) {
+
+        formdata.append('address', proUpdateForm.value.address);
+
+    }
+
+    if(proUpdateForm.value.country) {
+
+        formdata.append('country', proUpdateForm.value.country);
+
+    }
+
+    if(proUpdateForm.value.phone_number) {
+
+        formdata.append('phone_number', proUpdateForm.value.phone_number);
+
+    }
+
+    if (proUpdateForm.value.birthday) {
+
+        formdata.append('birthday', proUpdateForm.value.birthday);
+
+    }
+
+    const {data : updateRes, error : updateErr, status } = await auth.updateProfile(formdata, auth.user.id);
+    isproLoading.value = false;
+    if (status.value !== 'success') {
+        openErrBox.value = true;
+        reserror.value.msg = updateErr.value.data.message;
+        reserror.value.errors = updateErr.value.data.errors;
+    } else {
+        notiStore.showNoti(updateRes.value.message, 'info');
+    }
+}
+
+async function updatePwd () {
+    ispwdLoading.value = true;
+    console.log(updatePwdForm.value);
+
+    if(!updatePwdForm.value.password) {
+        reserror.value.msg = 'Password field required.'
+        reserror.value.errors = {
+            error : ['Password field required']
+        }
+    }
+
+    if (updatePwdForm.value.password !== updatePwdForm.value.password_confirmation) {
+        reserror.value.msg = 'Password confirmation do not match.'
+        reserror.value.errors = {
+            error : ['Passwords do not match']
+        }
+    }
+
+    const {data : updatePwdRes, error : updatePwdErr, status : updateStusts} = await auth.updatePwd(updatePwdForm.value, auth.user.id);
+    ispwdLoading.value = false;
+    if (updateStusts.value !== 'success') {
+        openErrBox.value = true;
+        reserror.value.msg = updatePwdErr.value.data.message;
+        reserror.value.errors = updatePwdErr.value.data.errors;
+    } else {
+        notiStore.showNoti(updatePwdRes.value.message, 'info');
+    }
+}
+
+
 </script>
 
 <style>

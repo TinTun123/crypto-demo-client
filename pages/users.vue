@@ -25,6 +25,49 @@
 
                 </div>
 
+                    <ul class="dark:bg-[var(--secondary-dark)] bg-white shadow-input-sha dark:shadow-none flex items-stretch rounded-[8px]">
+
+                        <li v-if="auth.userList.current_page > 1" @click.stop="auth.getPageLink(auth.userList.current_page - 1)" :class="[themeStore.isgrad ? 'text-[var(--theme-from)]' : 'text-[var(--theme-color)]']" class="p-1 pl-3 rounded-[8px] flex items-center justify-center border border-[#eeeeee]/20 dark:border-none laptop:cursor-pointer laptop:hover:bg-black/10 laptop:active:bg-black/20 transition-colors dark:laptop:hover:bg-white/10 dark:laptop:active:bg-white/30 text-[14px] font-[600]">
+                            <span>
+                                prev
+                            </span>
+                        </li>
+                        <!-- <li v-if="auth.userList.current_page > 1" @click.stop="auth.getPageLink(1)"  class="px-3 rounded-[8px] text-[var(--teriary-dark)] dark:text-[var(--text-dark)] flex items-center justify-center border border-[#eeeeee]/20 dark:border-none laptop:cursor-pointer laptop:hover:bg-black/10 transition-colors laptop:active:bg-black/20 dark:laptop:hover:bg-white/10 text-[14px] font-[600] dark:laptop:active:bg-white/30">
+                            <span>
+                                1
+                            </span>
+                        </li> -->
+                        <li v-if="auth.userList.current_page > 4" class="px-3 rounded-[8px] flex items-center justify-center text-[var(--teriary-dark)] dark:text-[var(--text-dark)] border border-[#eeeeee]/20 dark:border-none laptop:cursor-pointer laptop:hover:bg-black/10 transition-colors laptop:active:bg-black/20 dark:laptop:hover:bg-white/10 text-[14px] font-[600] dark:laptop:active:bg-white/30">
+                            <span>
+                                ...
+                            </span>
+                        </li>
+                        <li v-for="(page, i) in auth.getVisiblePages()" :class="[ Number(auth.userList.current_page) === Number(page) ? (themeStore.isgrad ? 'text-[var(--theme-from)]' : 'text-[var(--theme-color)]') : 'text-[var(--teriary-dark)] dark:text-[var(--text-dark)]']" @click.stop="auth.getPageLink(page)" :key="i" class="px-3 rounded-[8px] flex items-center justify-center border border-[#eeeeee]/20 dark:border-none laptop:cursor-pointer laptop:hover:bg-black/10 transition-colors laptop:active:bg-black/20 dark:laptop:hover:bg-white/10 text-[14px] font-[600] dark:laptop:active:bg-white/30">
+                            <span>
+                                {{ page }}
+                            </span>
+                        </li>
+                        <li v-if="auth.userList.last_page - auth.userList.current_page > 3" class="p-1 rounded-[8px] flex items-center justify-center border border-[#eeeeee]/20 dark:border-none text-[var(--teriary-dark)] dark:text-[var(--text-dark)] laptop:cursor-pointer laptop:hover:bg-black/10 transition-colors laptop:active:bg-black/20 dark:laptop:hover:bg-white/10 text-[14px] font-[600] dark:laptop:active:bg-white/30">
+                            <span>
+                                ...
+                            </span>
+                        </li>
+
+                        <!-- <li v-if="auth.userList.last_page > auth.userList.current_page" @click.stop="getPageLink(auth.userList.last_page)" class="p-1 rounded-[8px] flex items-center justify-center border border-[#eeeeee]/20 dark:border-none laptop:cursor-pointer laptop:hover:bg-black/10 transition-colors laptop:active:bg-black/20 dark:laptop:hover:bg-white/10 text-[14px] font-[600] dark:laptop:active:bg-white/30">
+                            <span>
+                                {{ auth.userList.last_page }}
+                            </span>
+                        </li> -->
+
+
+                        <li v-if="auth.userList.current_page < auth.userList.last_page" @click.stop="auth.getPageLink(Number(auth.userList.current_page) + 1)" :class="[themeStore.isgrad ? 'text-[var(--theme-from)]' : 'text-[var(--theme-color)]']" class="p-1 pr-3 rounded-[8px] flex items-center justify-center border border-[#eeeeee]/20 dark:border-none laptop:cursor-pointer laptop:hover:bg-black/10 transition-colors laptop:active:bg-black/20 dark:laptop:hover:bg-white/10 text-[14px] font-[600] dark:laptop:active:bg-white/30">
+                            <span>
+                                next
+                            </span>
+                        </li>
+                    </ul>
+            
+
                 <div @click.stop="dropFilter = !dropFilter" class="dark:bg-[var(--secondary-dark)] relative flex justify-between gap-x-2 px-2 laptop:cursor-pointer w-[120px] items-center bg-white rounded-[15px] border border-[#eeeeee]/20 dark:border-none shadow-input-sha dark:shadow-none">
     
                     <span :class="[themeStore.isgrad ? 'text-[var(--theme-from)]' : 'text-[var(--theme-color)]']" class="text-[14px] font-[600]">Filter</span>
@@ -51,27 +94,29 @@
             </div>
 
             <div class="flex flex-col lg-tablet:grid lg-tablet:grid-cols-2 laptop:grid-cols-3 gap-4">
-                <div @click.stop="openUserModal = !openUserModal" class="relative dark:bg-[var(--secondary-dark)] laptop:hover:cursor-pointer laptop:hover:bg-black/10 transition-colors p-3 h-[180px] w-full aspect-square laptop:active:bg-black/20 dark:laptop:active:bg-[#222222]/60 dark:laptop:hover:bg-[#222222]/80 bg-white rounded-[15px] border border-[#eeeeee]/20 dark:border-none shadow-input-sha dark:shadow-none">
-                    <div class="text-[12px] absolute p-2 right-0 top-0 rounded-tr-[15px] rounded-bl-[15px] text-white" :class="[themeStore.isgrad ? 'bg-[var(--theme-from)]' : 'bg-[var(--theme-color)]']">
+                
+                <div @click.stop="selectedUser = user; openUserModal = !openUserModal" v-for="(user, i) in auth.userList.data" class="relative dark:bg-[var(--secondary-dark)] laptop:hover:cursor-pointer laptop:hover:bg-black/10 transition-colors p-3 h-[180px] w-full aspect-square laptop:active:bg-black/20 dark:laptop:active:bg-[#222222]/60 dark:laptop:hover:bg-[#222222]/80 bg-white rounded-[15px] border border-[#eeeeee]/20 dark:border-none shadow-input-sha dark:shadow-none">
+                    <div v-if="user.isVerified" class="text-[12px] absolute p-2 right-0 top-0 rounded-tr-[15px] rounded-bl-[15px] text-white" :class="[themeStore.isgrad ? 'bg-[var(--theme-from)]' : 'bg-[var(--theme-color)]']">
                         verified
                     </div>
                     <div class="flex gap-x-2">
-                        <div class="w-[35px] h-[35px]">
-                            <img src="/profile.png" class="w-full h-full" alt="">
+                        <div class="w-[35px] h-[35px] rounded-full overflow-hidden">
+                            <img :src="user.profile_img" class="w-full h-full" alt="">
                         </div>
 
                         <div class="">
                             <div class="flex items-center gap-x-2 dark:text-[var(--text-dark)] text-[#666666]">
                                 <span class="text-[16px] font-[600]">
-                                    User name
+                                    {{ user.firstName }}
+                                    {{ user.lastName }}
                                 </span>
                                 <span class="text-[14px] font-[300]">
-                                    ID: 1124345
+                                    ID: {{ user.id }}
                                 </span>
                             </div>
 
                             <span class="text-[12px] dark:text-[var(--text-dark)] font-[500] text-[#666666]">
-                                User@gmail.com
+                                {{ user.email }}
                             </span>
                             
 
@@ -142,368 +187,38 @@
                         </div>
                     </div>
                 </div>
-
-                <div @click.stop="openUserModal = !openUserModal" class="dark:bg-[var(--secondary-dark)] laptop:hover:cursor-pointer laptop:hover:bg-black/10 transition-colors p-3 h-[180px] w-full aspect-square laptop:active:bg-black/20 dark:laptop:active:bg-[#222222]/60 dark:laptop:hover:bg-[#222222]/80 bg-white rounded-[15px] border border-[#eeeeee]/20 dark:border-none shadow-input-sha dark:shadow-none">
-                    <div class="flex gap-x-2">
-                        <div class="w-[35px] h-[35px] rounded-full overflow-hidden">
-                            <img src="/profile_female.jpg" class="w-full h-full" alt="">
-                        </div>
-
-                        <div class="">
-                            <div class="flex items-center gap-x-2 dark:text-[var(--text-dark)] text-[#666666]">
-                                <span class="text-[16px] font-[600]">
-                                    User name
-                                </span>
-                                <span class="text-[14px] font-[300]">
-                                    ID: 1124345
-                                </span>
-                            </div>
-
-                            <span class="text-[12px] dark:text-[var(--text-dark)] font-[500] text-[#666666]">
-                                User@gmail.com
-                            </span>
-                            
-
-                        </div>
-                    </div>
-
-                    <h1 class="font-[500] mb-2 mt-4 text-[14px]" :class="[themeStore.isgrad ? 'text-[var(--theme-from)]' : 'text-[var(--theme-color)]']">Balance</h1>
-
-                    <div class="grid grid-cols-3 gap-y-3">
-                        <div class="flex gap-x-1">
-                            <div class="w-[20px] h-[20px]">
-                                <img src="/btc.png" class="h-full w-full" alt="">
-                            </div>
-                            <span class="flex-none text-[14px] dark:text-[var(--text-dark)] font-[500] text-[#666666]">
-                                2.345 BTC
-                            </span>
-                        </div>
-
-                        <div class="flex gap-x-1">
-                            <div class="w-[20px] h-[20px]">
-                                <img src="/bch.png" class="h-full w-full" alt="">
-                            </div>
-                            <span class="flex-none text-[14px] dark:text-[var(--text-dark)] font-[500] text-[#666666]">
-                                54.5 BCH
-                            </span>
-                        </div>
-
-                        <div class="flex gap-x-1">
-                            <div class="w-[20px] h-[20px]">
-                                <img src="/dash.png" class="h-full w-full" alt="">
-                            </div>
-                            <span class="flex-none text-[14px] dark:text-[var(--text-dark)] font-[500] text-[#666666]">
-                                10.345 DAH
-                            </span>
-                        </div>
-
-                        <div class="flex gap-x-1">
-                            <div class="w-[20px] h-[20px]">
-                                <img src="/doge.png" class="h-full w-full" alt="">
-                            </div>
-                            <span class="flex-none text-[14px] dark:text-[var(--text-dark)] font-[500] text-[#666666]">
-                                12.345 DOG
-                            </span>
-                        </div>
-
-                        <div class="flex gap-x-1">
-                            <div class="w-[20px] h-[20px]">
-                                <img src="/eth.png" class="h-full w-full" alt="">
-                            </div>
-                            <span class="flex-none text-[14px] dark:text-[var(--text-dark)] font-[500] text-[#666666]">
-                                514.5 ETH
-                            </span>
-                        </div>
-
-                        <div class="flex gap-x-1">
-                            <div class="w-[20px] h-[20px]">
-                                <img src="/ltc.png" class="h-full w-full" alt="">
-                            </div>
-                            <span class="flex-none text-[14px] dark:text-[var(--text-dark)] font-[500] text-[#666666]">
-                                21.345 LTC
-                            </span>
-                        </div>
-                    </div>
-                </div>
-
-                <div @click.stop="openUserModal = !openUserModal" class="relative dark:bg-[var(--secondary-dark)] laptop:hover:cursor-pointer laptop:hover:bg-black/10 transition-colors p-3 h-[180px] w-full aspect-square laptop:active:bg-black/20 dark:laptop:active:bg-[#222222]/60 dark:laptop:hover:bg-[#222222]/80 bg-white rounded-[15px] border border-[#eeeeee]/20 dark:border-none shadow-input-sha dark:shadow-none">
-                    <div class="text-[12px] absolute p-2 right-0 top-0 rounded-tr-[15px] rounded-bl-[15px] text-white" :class="[themeStore.isgrad ? 'bg-[var(--theme-from)]' : 'bg-[var(--theme-color)]']">
-                        verified
-                    </div>
-
-                    <div class="flex gap-x-2">
-                        <div class="w-[35px] h-[35px]">
-                            <img src="/profile.png" class="w-full h-full" alt="">
-                        </div>
-
-                        <div class="">
-                            <div class="flex items-center gap-x-2 dark:text-[var(--text-dark)] text-[#666666]">
-                                <span class="text-[16px] font-[600]">
-                                    User name
-                                </span>
-                                <span class="text-[14px] font-[300]">
-                                    ID: 1124345
-                                </span>
-                            </div>
-
-                            <span class="text-[12px] dark:text-[var(--text-dark)] font-[500] text-[#666666]">
-                                User@gmail.com
-                            </span>
-                            
-
-                        </div>
-                    </div>
-
-                    <h1 class="font-[500] mb-2 mt-4 text-[14px]" :class="[themeStore.isgrad ? 'text-[var(--theme-from)]' : 'text-[var(--theme-color)]']">Balance</h1>
-
-                    <div class="grid grid-cols-3 gap-y-3">
-                        <div class="flex gap-x-1">
-                            <div class="w-[20px] h-[20px]">
-                                <img src="/btc.png" class="h-full w-full" alt="">
-                            </div>
-                            <span class="flex-none text-[14px] dark:text-[var(--text-dark)] font-[500] text-[#666666]">
-                                2.345 BTC
-                            </span>
-                        </div>
-
-                        <div class="flex gap-x-1">
-                            <div class="w-[20px] h-[20px]">
-                                <img src="/bch.png" class="h-full w-full" alt="">
-                            </div>
-                            <span class="flex-none text-[14px] dark:text-[var(--text-dark)] font-[500] text-[#666666]">
-                                54.5 BCH
-                            </span>
-                        </div>
-
-                        <div class="flex gap-x-1">
-                            <div class="w-[20px] h-[20px]">
-                                <img src="/dash.png" class="h-full w-full" alt="">
-                            </div>
-                            <span class="flex-none text-[14px] dark:text-[var(--text-dark)] font-[500] text-[#666666]">
-                                10.345 DAH
-                            </span>
-                        </div>
-
-                        <div class="flex gap-x-1">
-                            <div class="w-[20px] h-[20px]">
-                                <img src="/doge.png" class="h-full w-full" alt="">
-                            </div>
-                            <span class="flex-none text-[14px] dark:text-[var(--text-dark)] font-[500] text-[#666666]">
-                                12.345 DOG
-                            </span>
-                        </div>
-
-                        <div class="flex gap-x-1">
-                            <div class="w-[20px] h-[20px]">
-                                <img src="/eth.png" class="h-full w-full" alt="">
-                            </div>
-                            <span class="flex-none text-[14px] dark:text-[var(--text-dark)] font-[500] text-[#666666]">
-                                514.5 ETH
-                            </span>
-                        </div>
-
-                        <div class="flex gap-x-1">
-                            <div class="w-[20px] h-[20px]">
-                                <img src="/ltc.png" class="h-full w-full" alt="">
-                            </div>
-                            <span class="flex-none text-[14px] dark:text-[var(--text-dark)] font-[500] text-[#666666]">
-                                21.345 LTC
-                            </span>
-                        </div>
-                    </div>
-                </div>
-
-                <div @click.stop="openUserModal = !openUserModal" class="dark:bg-[var(--secondary-dark)] laptop:hover:cursor-pointer laptop:hover:bg-black/10 transition-colors p-3 h-[180px] w-full aspect-square laptop:active:bg-black/20 dark:laptop:active:bg-[#222222]/60 dark:laptop:hover:bg-[#222222]/80 bg-white rounded-[15px] border border-[#eeeeee]/20 dark:border-none shadow-input-sha dark:shadow-none">
-                    <div class="flex gap-x-2">
-                        <div class="w-[35px] h-[35px] rounded-full overflow-hidden">
-                            <img src="profile_female.jpg" class="w-full h-full" alt="">
-                        </div>
-
-                        <div class="">
-                            <div class="flex items-center gap-x-2 dark:text-[var(--text-dark)] text-[#666666]">
-                                <span class="text-[16px] font-[600]">
-                                    User name
-                                </span>
-                                <span class="text-[14px] font-[300]">
-                                    ID: 1124345
-                                </span>
-                            </div>
-
-                            <span class="text-[12px] dark:text-[var(--text-dark)] font-[500] text-[#666666]">
-                                User@gmail.com
-                            </span>
-                            
-
-                        </div>
-                    </div>
-
-                    <div class="mb-2 mt-4 flex justify-between">
-                        <h1 class="font-[500]  text-[14px]" :class="[themeStore.isgrad ? 'text-[var(--theme-from)]' : 'text-[var(--theme-color)]']">Balance</h1>
-                        <div class="font-[500] w-[50%] overflow-hidden text-[14px] flex gap-x-1 items-center" :class="[themeStore.isgrad ? 'text-[var(--theme-from)]' : 'text-[var(--theme-color)]']">
-                            <span>Key:</span>
-                            <span style="{text-overflow: ellipsis;}" class="text-[12px] overflow-hidden dark:text-[var(--text-dark)] font-[500] text-[#666666]">fsdfhheradfsdfwettehetotpeyieptpqwe</span>
-                        </div>
-                    </div>
-
-                    <div class="grid grid-cols-3 gap-y-3">
-                        <div class="flex gap-x-1">
-                            <div class="w-[20px] h-[20px]">
-                                <img src="/btc.png" class="h-full w-full" alt="">
-                            </div>
-                            <span class="flex-none text-[14px] dark:text-[var(--text-dark)] font-[500] text-[#666666]">
-                                2.345 BTC
-                            </span>
-                        </div>
-
-                        <div class="flex gap-x-1">
-                            <div class="w-[20px] h-[20px]">
-                                <img src="/bch.png" class="h-full w-full" alt="">
-                            </div>
-                            <span class="flex-none text-[14px] dark:text-[var(--text-dark)] font-[500] text-[#666666]">
-                                54.5 BCH
-                            </span>
-                        </div>
-
-                        <div class="flex gap-x-1">
-                            <div class="w-[20px] h-[20px]">
-                                <img src="/dash.png" class="h-full w-full" alt="">
-                            </div>
-                            <span class="flex-none text-[14px] dark:text-[var(--text-dark)] font-[500] text-[#666666]">
-                                10.345 DAH
-                            </span>
-                        </div>
-
-                        <div class="flex gap-x-1">
-                            <div class="w-[20px] h-[20px]">
-                                <img src="/doge.png" class="h-full w-full" alt="">
-                            </div>
-                            <span class="flex-none text-[14px] dark:text-[var(--text-dark)] font-[500] text-[#666666]">
-                                12.345 DOG
-                            </span>
-                        </div>
-
-                        <div class="flex gap-x-1">
-                            <div class="w-[20px] h-[20px]">
-                                <img src="/eth.png" class="h-full w-full" alt="">
-                            </div>
-                            <span class="flex-none text-[14px] dark:text-[var(--text-dark)] font-[500] text-[#666666]">
-                                514.5 ETH
-                            </span>
-                        </div>
-
-                        <div class="flex gap-x-1">
-                            <div class="w-[20px] h-[20px]">
-                                <img src="/ltc.png" class="h-full w-full" alt="">
-                            </div>
-                            <span class="flex-none text-[14px] dark:text-[var(--text-dark)] font-[500] text-[#666666]">
-                                21.345 LTC
-                            </span>
-                        </div>
-                    </div>
-                </div>
-
-                <div @click.stop="openUserModal = !openUserModal" class="dark:bg-[var(--secondary-dark)] laptop:hover:cursor-pointer laptop:hover:bg-black/10 transition-colors laptop:active:bg-black/20 p-3 h-[180px] w-full aspect-square dark:laptop:active:bg-[#222222]/60 dark:laptop:hover:bg-[#222222]/80 bg-white rounded-[15px] border border-[#eeeeee]/20 dark:border-none shadow-input-sha dark:shadow-none">
-                    <div class="flex gap-x-2">
-                        <div class="w-[35px] h-[35px]">
-                            <img src="/profile.png" class="w-full h-full" alt="">
-                        </div>
-
-                        <div class="">
-                            <div class="flex items-center gap-x-2 dark:text-[var(--text-dark)] text-[#666666]">
-                                <span class="text-[16px] font-[600]">
-                                    User name
-                                </span>
-                                <span class="text-[14px] font-[300]">
-                                    ID: 1124345
-                                </span>
-                            </div>
-
-                            <span class="text-[12px] dark:text-[var(--text-dark)] font-[500] text-[#666666]">
-                                User@gmail.com
-                            </span>
-                            
-
-                        </div>
-                    </div>
-
-                    <h1 class="font-[500] mb-2 mt-4 text-[14px]" :class="[themeStore.isgrad ? 'text-[var(--theme-from)]' : 'text-[var(--theme-color)]']">Balance</h1>
-
-                    <div class="grid grid-cols-3 gap-y-3">
-                        <div class="flex gap-x-1">
-                            <div class="w-[20px] h-[20px]">
-                                <img src="/btc.png" class="h-full w-full" alt="">
-                            </div>
-                            <span class="flex-none text-[14px] dark:text-[var(--text-dark)] font-[500] text-[#666666]">
-                                2.345 BTC
-                            </span>
-                        </div>
-
-                        <div class="flex gap-x-1">
-                            <div class="w-[20px] h-[20px]">
-                                <img src="/bch.png" class="h-full w-full" alt="">
-                            </div>
-                            <span class="flex-none text-[14px] dark:text-[var(--text-dark)] font-[500] text-[#666666]">
-                                54.5 BCH
-                            </span>
-                        </div>
-
-                        <div class="flex gap-x-1">
-                            <div class="w-[20px] h-[20px]">
-                                <img src="/dash.png" class="h-full w-full" alt="">
-                            </div>
-                            <span class="flex-none text-[14px] dark:text-[var(--text-dark)] font-[500] text-[#666666]">
-                                10.345 DAH
-                            </span>
-                        </div>
-
-                        <div class="flex gap-x-1">
-                            <div class="w-[20px] h-[20px]">
-                                <img src="/doge.png" class="h-full w-full" alt="">
-                            </div>
-                            <span class="flex-none text-[14px] dark:text-[var(--text-dark)] font-[500] text-[#666666]">
-                                12.345 DOG
-                            </span>
-                        </div>
-
-                        <div class="flex gap-x-1">
-                            <div class="w-[20px] h-[20px]">
-                                <img src="/eth.png" class="h-full w-full" alt="">
-                            </div>
-                            <span class="flex-none text-[14px] dark:text-[var(--text-dark)] font-[500] text-[#666666]">
-                                514.5 ETH
-                            </span>
-                        </div>
-
-                        <div class="flex gap-x-1">
-                            <div class="w-[20px] h-[20px]">
-                                <img src="/ltc.png" class="h-full w-full" alt="">
-                            </div>
-                            <span class="flex-none text-[14px] dark:text-[var(--text-dark)] font-[500] text-[#666666]">
-                                21.345 LTC
-                            </span>
-                        </div>
-                    </div>
-                </div>
-
             </div>
 
             <Teleport to="body">
                 <transition name="modal">
                     <div v-if="openUserModal" class="modal-mask">
-                        <div class="modal-container rounded-[15px] relative bg-white dark:bg-[var(--secondary-dark)] p-[30px] overflow-hidden laptop:w-[80%]">
-                            <div @click.stop="openUserModal = !openUserModal" class="absolute top-2 right-2">
+                        <div class="modal-container rounded-[15px] relative bg-white dark:bg-[var(--secondary-dark)] p-[30px] overflow-hidden laptop:w-[80%] z-[100]">
+                            <div @click.stop="openUserModal = !openUserModal; selectedTab = 'profile'" class="absolute top-2 right-2">
+                                
                                 <svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path class="dark:fill-[var(--light-bg)] laptop:cursor-pointer fill-[var(--secondary-dark)]" d="M12.2402 0.240234C9.05764 0.240234 6.00539 1.50452 3.75495 3.75495C1.50452 6.00539 0.240234 9.05764 0.240234 12.2402C0.240234 15.4228 1.50452 18.4751 3.75495 20.7255C6.00539 22.976 9.05764 24.2402 12.2402 24.2402C15.4228 24.2402 18.4751 22.976 20.7255 20.7255C22.976 18.4751 24.2402 15.4228 24.2402 12.2402C24.2402 9.05764 22.976 6.00539 20.7255 3.75495C18.4751 1.50452 15.4228 0.240234 12.2402 0.240234ZM19.0817 16.6131L16.6117 19.0831L12.2402 14.7102L7.86738 19.0817L5.39738 16.6117L9.77166 12.2402L5.39881 7.86738L7.86881 5.39881L12.2402 9.77023L16.6131 5.39738L19.0831 7.86738L14.7088 12.2402L19.0817 16.6131Z"/>
                                 </svg>
+
                             </div>
                             <div class="flex items-center gap-x-4 dark:text-[var(--text-dark)] text-[#666666] mb-6">
                                 <div class="flex gap-x-4">
-                                    <div class="w-[48px] h-[48px]">
-                                        <img src="/profile.png" class="w-full h-full" alt="">
+                                    <div class="w-[48px] h-[48px] rounded-full overflow-hidden">
+                                        <img :src="selectedUser.profile_img" class="w-full h-full" alt="">
                                     </div>
                                     <div class="flex flex-col">
-                                        <h1 class="text-[#666666] dark:text-[var(--text-dark)] text-[18px] font-[400]">UserName</h1>
-                                        <span class="text-[#666666] dark:text-[var(--text-dark)] text-[14px] font-[500]">User@gmail.com</span>
+                                        <h1 class="text-[#666666] dark:text-[var(--text-dark)] text-[18px] font-[400]">
+                                            <div class="flex gap-x-2 items-center">
+                                                <span>
+                                                    {{ selectedUser.firstName }} {{ selectedUser.lastName }}
+                                                </span>
+                                                <div v-if="selectedUser.isVerified" class="w-4 h-4">
+                                                    <svg class="w-full h-full" width="17" height="17" viewBox="0 0 17 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                        <path :class="[themeStore.isgrad ? 'fill-[var(--theme-color)]' : 'fill-[var(--theme-color)]']" d="M8.66602 0.666656C4.25002 0.666656 0.666016 4.25066 0.666016 8.66666C0.666016 13.0827 4.25002 16.6667 8.66602 16.6667C13.082 16.6667 16.666 13.0827 16.666 8.66666C16.666 4.25066 13.082 0.666656 8.66602 0.666656ZM6.49802 12.0987L3.62602 9.22666C3.55195 9.15259 3.4932 9.06466 3.45311 8.96789C3.41303 8.87112 3.3924 8.7674 3.3924 8.66266C3.3924 8.55791 3.41303 8.45419 3.45311 8.35742C3.4932 8.26065 3.55195 8.17272 3.62602 8.09866C3.70008 8.02459 3.78801 7.96584 3.88478 7.92576C3.98155 7.88567 4.08527 7.86504 4.19002 7.86504C4.29476 7.86504 4.39848 7.88567 4.49525 7.92576C4.59202 7.96584 4.67995 8.02459 4.75402 8.09866L7.06602 10.4027L12.57 4.89866C12.7196 4.74907 12.9225 4.66504 13.134 4.66504C13.3456 4.66504 13.5484 4.74907 13.698 4.89866C13.8476 5.04824 13.9316 5.25112 13.9316 5.46266C13.9316 5.6742 13.8476 5.87707 13.698 6.02666L7.62602 12.0987C7.552 12.1728 7.46409 12.2317 7.36732 12.2718C7.27054 12.3119 7.16679 12.3326 7.06202 12.3326C6.95724 12.3326 6.85349 12.3119 6.75672 12.2718C6.65994 12.2317 6.57203 12.1728 6.49802 12.0987Z" />
+                                                    </svg>
+                                                </div>
+                                            </div>
+                                        </h1>
+                                        <span class="text-[#666666] dark:text-[var(--text-dark)] text-[14px] font-[500]">{{ selectedUser.email }}</span>
                                     </div>
                                 </div>
                                 <div @click.stop="scrollToprofile(); selectedTab = 'profile'" :class="[selectedTab === 'profile' ? (themeStore.isgrad ? 'bg-[var(--theme-from)] text-white' : 'bg-[var(--theme-color)] text-white') : 'dark:bg-[var(--secondary-dark)] bg-white']" class="text-[16px] flex gap-x-2 items-center px-2 py-1 transition-colors laptop:cursor-pointer shadow-btn-sha rounded-full" >
@@ -556,6 +271,7 @@
                                 </span>
                                 
                                 <span @click.stop="scrollToContract(); selectedTab = 'contract'" :class="[selectedTab === 'contract' ? (themeStore.isgrad ? 'bg-[var(--theme-from)] text-white' : 'bg-[var(--theme-color)] text-white') : 'dark:bg-[var(--secondary-dark)] bg-white']" class="text-[16px] px-2 py-1 flex items-center gap-x-2 transition-colors laptop:cursor-pointer shadow-btn-sha rounded-full">
+                                    
                                     <span class="w-4 h-4">
                                         <svg width="17" height="17" viewBox="0 0 17 17" fill="none" xmlns="http://www.w3.org/2000/svg">
                                             <path :class="[selectedTab === 'contract' ? 'fill-white' : 'dark:fill-[var(--text-dark)] fill-[#666666]']" class="w-full h-full" fill-rule="evenodd" clip-rule="evenodd" d="M5.46699 6.2723C5.46721 5.11538 5.82573 3.98693 6.4933 3.04204C7.16086 2.09715 8.10469 1.3822 9.19506 0.995475C10.2854 0.608747 11.4688 0.569219 12.5825 0.882322C13.6963 1.19543 14.6857 1.84579 15.4149 2.74403C16.144 3.64227 16.577 4.74428 16.6544 5.89861C16.7319 7.05293 16.4499 8.2029 15.8472 9.19046C15.2445 10.178 14.3508 10.9547 13.2889 11.4137C12.2269 11.8727 11.0488 11.9916 9.91659 11.7539L8.66699 13.0035C8.367 13.3036 7.9601 13.4722 7.53579 13.4723H7.06699C7.06699 13.8966 6.89842 14.3036 6.59836 14.6037C6.2983 14.9037 5.89134 15.0723 5.46699 15.0723C5.46699 15.4966 5.29842 15.9036 4.99836 16.2037C4.6983 16.5037 4.29134 16.6723 3.86699 16.6723H2.26699C1.84265 16.6723 1.43568 16.5037 1.13562 16.2037C0.835563 15.9036 0.666992 15.4966 0.666992 15.0723V13.0035C0.667083 12.5792 0.835713 12.1723 1.13579 11.8723L5.58539 7.4227C5.50648 7.04433 5.4668 6.65882 5.46699 6.2723ZM11.067 3.8723C10.8548 3.8723 10.6513 3.95659 10.5013 4.10662C10.3513 4.25665 10.267 4.46013 10.267 4.6723C10.267 4.88448 10.3513 5.08796 10.5013 5.23799C10.6513 5.38802 10.8548 5.4723 11.067 5.4723C11.2792 5.4723 11.4826 5.55659 11.6327 5.70662C11.7827 5.85665 11.867 6.06013 11.867 6.2723C11.867 6.48448 11.9513 6.68796 12.1013 6.83799C12.2513 6.98802 12.4548 7.0723 12.667 7.0723C12.8792 7.0723 13.0826 6.98802 13.2327 6.83799C13.3827 6.68796 13.467 6.48448 13.467 6.2723C13.467 5.63578 13.2141 5.02533 12.764 4.57525C12.314 4.12516 11.7035 3.8723 11.067 3.8723Z" fill="#DDDDDD"/>
@@ -572,7 +288,7 @@
                             <div class="overflow-hidden">
                                 <div class="flex gap-x-[30px]">
                                     <div ref="profileRef" id="profile" class="flex-none w-full">
-                                        <adminProfileComponent />
+                                        <adminProfileComponent :user="selectedUser" @toggleVerify="toggleVerify"/>
                                     </div>
 
                                     <div ref="balanceRef" id="balance" class="w-full flex-none">
@@ -584,11 +300,11 @@
                                     </div>
 
                                     <div ref="actRef" id="activities" class="w-full flex-none">
-                                        <activitiesLog/>
+                                        <activitiesLog :user="selectedUser"/>
                                     </div>
 
                                     <div ref="contractRef" id="contract" class="w-full flex flex-none">
-                                        <contractComponent />
+                                        <contractComponent :user="selectedUser"/>
                                     </div>
                                 </div>
                             </div>
@@ -604,8 +320,10 @@
 </template>
 
 <script setup>
+
 import mainLayout from '../layouts/mainLayout';
 import { useThemeStore } from '../store/useThemeStore';
+import { useAuthStore } from '../store/useAuthStore';
 
 const themeStore = useThemeStore();
 const dropFilter = ref(false);
@@ -613,16 +331,30 @@ const openUserModal = ref(false);
 
 const selectedTab = ref('profile');
 
+const selectedUser = ref({});
+
 const profileRef =ref(null);
 const balanceRef = ref(null);
 const transcationRef = ref(null);
 const actRef = ref(null);
 const contractRef = ref(null);
 
+const auth = useAuthStore();
+
 definePageMeta({
     middleware : ['auth', 'is-admin']
 })
 
+onMounted(async () => {
+    await auth.fetchUsers();
+
+})
+
+function toggleVerify() {
+
+    selectedUser.value.isVerified = !selectedUser.value.isVerified;
+    
+}
 function scrollToprofile() {
     profileRef.value.scrollIntoView({behavior : 'smooth', inline : 'end'});
 }

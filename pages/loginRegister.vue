@@ -73,6 +73,7 @@ import { useThemeStore } from '../store/useThemeStore';
 
 const logincomponent = resolveComponent('loginComponent');
 const registerComponent = resolveComponent('registerComponent');
+const verify2faComponent = resolveComponent('2faComponent');
 
 const themestore = useThemeStore();
 const  slideColors = ref(false);
@@ -81,7 +82,8 @@ const curretTab = ref(0);
 
 const tab = [
 logincomponent,
-registerComponent];
+registerComponent,
+verify2faComponent];
 
 
 function changeComponent(tabNum) {

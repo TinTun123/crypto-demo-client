@@ -17,22 +17,22 @@ export function useFetchUser() {
         ...useRequestHeaders(["referer", "cookie"])   
     }
 
-    //     return useFetch("https://crypto-demo.sunflowerseedsfoundation.com/user", {
-    //     credentials : 'include',
-    //     method : 'GET',
-    //     watch : false,
-    //     headers : {
-    //         ...headers,
-    //         referer : 'https://sunflowerseedsfoundation.com/'
-    //     }
-    // })
-
-    return useFetch("http://localhost:8000/user", {
+        return useFetch("https://crypto-demo.sunflowerseedsfoundation.com/user", {
         credentials : 'include',
+        method : 'GET',
         watch : false,
         headers : {
             ...headers,
-            referer : 'http://localhost:3000'
+            referer : 'https://sunflowerseedsfoundation.com/'
         }
     })
+
+    // return useFetch("http://localhost:8000/user", {
+    //     credentials : 'include',
+    //     watch : false,
+    //     headers : {
+    //         ...headers,
+    //         referer : 'http://localhost:3000'
+    //     }
+    // })
 }

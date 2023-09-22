@@ -26,24 +26,46 @@
 </template>
 
 <script setup>
+
 import { useThemeStore } from '../store/useThemeStore';
+import { useAuthStore } from '../store/useAuthStore';
 
 
 const themeStore = useThemeStore();
 const emit = defineEmits(['close', 'privatekey']);
 const key = ref('');
 const error = ref('');
-
+const isLoading = ref(false);
+const auth = useAuthStore();
 
 function emitClose () {
     emit('close');
 }
 
-function save() {
+async function save() {
+    isLoading.value = true;
+    error.value = {};
+
     if (key.value) {
-        emit('privatekey', key.value);
-        emit('close');
+        // emit('privatekey', key.value);
+        // emit('close');
+        const formdata = new FormData();
+        formdata.append('key', key.value);
+
+        const {data : addPriRes, error : addPriErr, status } = await auth.uploadKey(formdata, auth.userObj.id);
+
+        if (status.value === 'success') {
+            emit('privatekey', addPriRes.value.key);
+            emit('close');
+        }
+        
+
+        if(addPriErr.value && addPriErr.value.data && addPriErr.value.data.message) {
+            error.value = addPriErr.value.data.message;
+        }
+
     } else {
+        isLoading.value = false;
         error.value = 'Please set you private key.'
 
         setTimeout(() => {

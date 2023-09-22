@@ -1,5 +1,5 @@
 <template>
-    <mainLayout>
+    <mainLayout> 
         <div class="mx-4 tablet:mx-[30px] min-h-screen">
 
             <div class="flex items-center gap-x-4 group laptop:cursor-pointer group py-[15px]">
@@ -18,25 +18,27 @@
                 </span>
             </div>
 
-            <div @click.stop="openPrivateKey = !openPrivateKey" :class="[privateKey ? 'laptop:w-[70%] mx-auto laptop:hover:bg-white dark:laptop:hover:bg-[var(--secondary-dark)]' : 'w-full laptop:hover:bg-white/20 dark:border-[#eeeeee]/20']" class="bg-white dark:bg-[var(--secondary-dark)] h-[180px] p-[30px] rounded-[15px] border border-[#eeeeee]/60  shadow-input-sha dark:shadow-none transition-colors laptop:cursor-pointer">
+            <div @click.stop="openModal" :class="[privateKey ? 'laptop:w-[70%] mx-auto laptop:hover:bg-white dark:laptop:hover:bg-[var(--secondary-dark)]' : 'w-full laptop:hover:bg-white/20 dark:border-[#eeeeee]/20']" class="bg-white dark:bg-[var(--secondary-dark)] h-[180px] p-[30px] rounded-[15px] border border-[#eeeeee]/60  shadow-input-sha dark:shadow-none transition-colors laptop:cursor-pointer">
                 <div v-if="!privateKey" class="border border-dotted border-black/60 rounded-[15px] flex justify-center items-center h-full">
                     <h1 class="text-[20px] font-[600] text-[var(--secondary-dark)] dark:text-[var(--text-dark)]">Add your private key</h1>
                 </div>
 
                 <div v-else class="rounded-[15px] relative flex gap-x-4 items-center justify-center h-full">
 
-                    <div class="absolute flex gap-x-2 items-center rounded-[16px] bg-red-400 px-4 py-2 top-0 right-0">
-                        <div>
-                            <svg width="13" height="17" viewBox="0 0 13 17" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M1.85718 16.3333C1.43814 16.3333 1.07928 16.184 0.780613 15.8853C0.481947 15.5867 0.332867 15.2281 0.333375 14.8095V7.19047C0.333375 6.77142 0.482708 6.41257 0.781375 6.1139C1.08004 5.81523 1.43865 5.66615 1.85718 5.66666H2.61909V4.14285C2.61909 3.08888 2.99065 2.19034 3.73376 1.44723C4.47687 0.704122 5.37515 0.332821 6.42861 0.333329C7.48258 0.333329 8.38112 0.704884 9.12423 1.448C9.86734 2.19111 10.2386 3.08939 10.2381 4.14285V5.66666H11C11.4191 5.66666 11.7779 5.816 12.0766 6.11466C12.3753 6.41333 12.5244 6.77193 12.5239 7.19047V14.8095C12.5239 15.2286 12.3745 15.5874 12.0759 15.8861C11.7772 16.1848 11.4186 16.3338 11 16.3333H1.85718ZM6.42861 12.5238C6.84766 12.5238 7.20652 12.3745 7.50518 12.0758C7.80385 11.7771 7.95293 11.4185 7.95242 11C7.95242 10.5809 7.80309 10.2221 7.50442 9.92342C7.20576 9.62476 6.84715 9.47568 6.42861 9.47619C6.00957 9.47619 5.65071 9.62552 5.35204 9.92419C5.05338 10.2229 4.9043 10.5815 4.9048 11C4.9048 11.419 5.05414 11.7779 5.3528 12.0766C5.65147 12.3752 6.01007 12.5243 6.42861 12.5238ZM4.1429 5.66666H8.71433V4.14285C8.71433 3.50793 8.49211 2.96825 8.04766 2.5238C7.60322 2.07936 7.06353 1.85714 6.42861 1.85714C5.79369 1.85714 5.25401 2.07936 4.80957 2.5238C4.36512 2.96825 4.1429 3.50793 4.1429 4.14285V5.66666Z" fill="white"/>
-                            </svg>
+                    <div class="absolute flex gap-x-2 items-center rounded-[16px] px-4 py-2 top-0 right-0" :class="[!privateKey.state ? 'bg-red-400' : 'bg-green-400']">
+                        <div v-if="!privateKey.state" class="w-4 h-4">
+                            <svg class="w-full h-full fill-white" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M400 224h-24v-72C376 68.2 307.8 0 224 0S72 68.2 72 152v72H48c-26.5 0-48 21.5-48 48v192c0 26.5 21.5 48 48 48h352c26.5 0 48-21.5 48-48V272c0-26.5-21.5-48-48-48zm-104 0H152v-72c0-39.7 32.3-72 72-72s72 32.3 72 72v72z"/></svg>
                         </div>
 
-                        <span class="text-white text-[16px] font-[600]">Lock</span>
+                        <div v-else class="w-4 h-4">
+                            <svg class="w-full h-full fill-white" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><path d="M423.5 0C339.5.3 272 69.5 272 153.5V224H48c-26.5 0-48 21.5-48 48v192c0 26.5 21.5 48 48 48h352c26.5 0 48-21.5 48-48V272c0-26.5-21.5-48-48-48h-48v-71.1c0-39.6 31.7-72.5 71.3-72.9 40-.4 72.7 32.1 72.7 72v80c0 13.3 10.7 24 24 24h32c13.3 0 24-10.7 24-24v-80C576 68 507.5-.3 423.5 0z"/></svg>
+                        </div>
+
+                        <span class="text-white text-[16px] font-[600]">{{ privateKey.state ? 'unLocked' : 'Locked' }}</span>
                     </div>
 
                     <h1 class="text-[18px] font-[500] dark:text-[var(--text-dark)] text-[var(--secondary-dark)] transition">Your Key:</h1>
-                    <span class="text-[14px] font-[500] dark:text-[var(--text-dark)] text-[var(--secondary-dark)] transition">{{ privateKey }}</span>
+                    <span class="text-[14px] font-[500] dark:text-[var(--text-dark)] text-[var(--secondary-dark)] transition">{{ privateKey.private_key }}</span>
                 </div>
             </div>
 
@@ -59,23 +61,46 @@
 
 <script setup>
 import mainLayout from '../layouts/mainLayout';
+import { useAuthStore } from '../store/useAuthStore';
 
 definePageMeta({
   
   middleware : ['auth']
 
 });
-
+const auth = useAuthStore();
 const openPrivateKey = ref(false);
-const privateKey = ref('');
+const privateKey = ref({});
+
+onMounted(async () => {
+
+    if (!auth.userObj.id) {
+        await auth.getUser(auth.user.id);
+    }
+
+    const {data : keyRef, error : keyError, status} = await auth.getKey(auth.userObj.id);
+
+    if(status.value === 'success') {
+        privateKey.value = keyRef.value.key;
+    }
+})
 
 function closePrivate () {
     openPrivateKey.value = !openPrivateKey.value;
 }
 
 function setPrivateKey(key) {
-    console.log(key);
-    privateKey.value = key;
+    
+    privateKey.value = key
+}
+
+function openModal() {
+
+    if (privateKey.value && privateKey.value.private_key) {
+        return;
+    } else {
+        openPrivateKey.value = !openPrivateKey.value;
+    }
 }
 
 </script>

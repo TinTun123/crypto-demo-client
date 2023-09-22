@@ -12,7 +12,7 @@ export default defineNuxtConfig({
   colorMode : {
     classSuffix : ''
   },
-  ssr : false,
+  // ssr : false,
   // tailwindcss : {
   //   cssPath: '~/assets/css/main.css',
   //   configPath : 'tainwind.config.js',

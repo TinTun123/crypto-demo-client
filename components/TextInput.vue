@@ -14,8 +14,7 @@
                 v-model="inputComputed"
                 autocomplete="off"
                 :placeholder="placeholder"
-                :disabled="disable"
-                :value="value"/>
+                :disabled="disable"/>
                 <span class="absolute right-4 text-[14px] font-[600] text-[#666666] top-[50%] -translate-y-[50%]">{{ tag }}</span>
             </div>
 
@@ -43,6 +42,7 @@ const {input, placeholder, label, max, tag, inputType, disable, value, error} = 
 const isFocused = ref(false);
 
 const inputComputed = computed({
+
     get: () => input.value,
     	set : (val) => emit('update:input', val)
 })

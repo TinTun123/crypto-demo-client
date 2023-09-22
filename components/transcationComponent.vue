@@ -1,5 +1,5 @@
 <template>
-    <div class="bg-white dark:bg-[var(--secondary-dark)] flex flex-col overflow-scroll h-[410px] rounded-[15px] mb-8">
+    <div class="bg-white  dark:bg-[var(--secondary-dark)] flex flex-col overflow-scroll h-[410px] rounded-[15px] mb-8">
                 
         <div class="p-[30px] flex gap-x-4 border-b border-[#eeeeee] dark:border-[#eeeeee]/20">
             

@@ -1,5 +1,5 @@
 <template>
-    <div class="bg-[var(--light-bg)] dark:bg-[#111111] transition-colors duration-500">
+    <div class="bg-[var(--light-bg)] dark:bg-[#111111] transition-colors relative duration-500">
         <div class="tablet:flex relative tablet:max-h-screen">
             <SideBar />
             <div class="tablet:flex tablet:flex-col flex-1">

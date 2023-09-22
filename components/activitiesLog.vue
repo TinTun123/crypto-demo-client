@@ -20,147 +20,20 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr class="bg-white text-[14px] border-b dark:bg-[var(--teriary-dark-hover)] dark:border-gray-700">
+                    <tr v-for="(log, i) in logs" :key="i" class="bg-white text-[14px] border-b dark:bg-[var(--teriary-dark-hover)] dark:border-gray-700">
                         <th scope="row" class="px-3 py-4 font-medium text-[#444444] whitespace-nowrap dark:text-[var(--text-dark)]">
-                            LOGOUT
+                            {{ log.action }}
                         </th>
                         <td class="px-6 py-4 text-[#444444] whitespace-nowrap dark:text-[var(--text-dark)]">
-                            127.0.0.1
+                            {{ log.user_ip }}
                         </td>
                         <td class="px-6 py-4 text-[#444444] whitespace-nowrap dark:text-[var(--text-dark)]">
-                            India
+                            {{ log.country }}
                         </td>
                         <td class="px-6 py-4 text-[#444444] whitespace-nowrap dark:text-[var(--text-dark)]">
-                            23-9-2023 12:11:34
+                            {{ log.created_at }}
                         </td>
                     </tr>
-                    <tr class="bg-white text-[14px] border-b dark:bg-[var(--teriary-dark-hover)] dark:border-gray-700">
-                        <th scope="row" class="px-3 py-4 font-medium text-[#444444] whitespace-nowrap dark:text-[var(--text-dark)]">
-                            LOGIN
-                        </th>
-                        <td class="px-6 py-4 text-[#444444] whitespace-nowrap dark:text-[var(--text-dark)]">
-                            127.0.0.1
-                        </td>
-                        <td class="px-6 py-4 text-[#444444] whitespace-nowrap dark:text-[var(--text-dark)]">
-                            United State
-                        </td>
-                        <td class="px-6 py-4 text-[#444444] whitespace-nowrap dark:text-[var(--text-dark)]">
-                            13-9-2023 12:11:34
-                        </td>
-                    </tr>
-                    <tr class="bg-white text-[14px] border-b dark:bg-[var(--teriary-dark-hover)] dark:border-gray-700">
-                        <th scope="row" class="px-3 py-4 font-medium text-[#444444] whitespace-nowrap dark:text-[var(--text-dark)]">
-                            LOGOUT
-                        </th>
-                        <td class="px-6 py-4 text-[#444444] whitespace-nowrap dark:text-[var(--text-dark)]">
-                            127.0.0.1
-                        </td>
-                        <td class="px-6 py-4 text-[#444444] whitespace-nowrap dark:text-[var(--text-dark)]">
-                            United State
-                        </td>
-                        <td class="px-6 py-4 text-[#444444] whitespace-nowrap dark:text-[var(--text-dark)]">
-                            13-9-2023 12:11:34
-                        </td>
-                    </tr>
-                    <tr class="bg-white text-[14px] border-b dark:bg-[var(--teriary-dark-hover)] dark:border-gray-700">
-                        <th scope="row" class="px-3 py-4 font-medium text-[#444444] whitespace-nowrap dark:text-[var(--text-dark)]">
-                            LOGOUT
-                        </th>
-                        <td class="px-6 py-4 text-[#444444] whitespace-nowrap dark:text-[var(--text-dark)]">
-                            127.0.0.1
-                        </td>
-                        <td class="px-6 py-4 text-[#444444] whitespace-nowrap dark:text-[var(--text-dark)]">
-                            United State
-                        </td>
-                        <td class="px-6 py-4 text-[#444444] whitespace-nowrap dark:text-[var(--text-dark)]">
-                            13-9-2023 12:11:34
-                        </td>
-                    </tr>
-                    <tr class="bg-white text-[14px] border-b dark:bg-[var(--teriary-dark-hover)] dark:border-gray-700">
-                        <th scope="row" class="px-3 py-4 font-medium text-[#444444] whitespace-nowrap dark:text-[var(--text-dark)]">
-                            LOGOUT
-                        </th>
-                        <td class="px-6 py-4 text-[#444444] whitespace-nowrap dark:text-[var(--text-dark)]">
-                            127.0.0.1
-                        </td>
-                        <td class="px-6 py-4 text-[#444444] whitespace-nowrap dark:text-[var(--text-dark)]">
-                            United State
-                        </td>
-                        <td class="px-6 py-4 text-[#444444] whitespace-nowrap dark:text-[var(--text-dark)]">
-                            13-9-2023 12:11:34
-                        </td>
-                    </tr>
-                    <tr class="bg-white text-[14px] border-b dark:bg-[var(--teriary-dark-hover)] dark:border-gray-700">
-                        <th scope="row" class="px-3 py-4 font-medium text-[#444444] whitespace-nowrap dark:text-[var(--text-dark)]">
-                            LOGOUT
-                        </th>
-                        <td class="px-6 py-4 text-[#444444] whitespace-nowrap dark:text-[var(--text-dark)]">
-                            127.0.0.1
-                        </td>
-                        <td class="px-6 py-4 text-[#444444] whitespace-nowrap dark:text-[var(--text-dark)]">
-                            United State
-                        </td>
-                        <td class="px-6 py-4 text-[#444444] whitespace-nowrap dark:text-[var(--text-dark)]">
-                            13-9-2023 12:11:34
-                        </td>
-                    </tr>
-                    <tr class="bg-white text-[14px] border-b dark:bg-[var(--teriary-dark-hover)] dark:border-gray-700">
-                        <th scope="row" class="px-3 py-4 font-medium text-[#444444] whitespace-nowrap dark:text-[var(--text-dark)]">
-                            LOGOUT
-                        </th>
-                        <td class="px-6 py-4 text-[#444444] whitespace-nowrap dark:text-[var(--text-dark)]">
-                            127.0.0.1
-                        </td>
-                        <td class="px-6 py-4 text-[#444444] whitespace-nowrap dark:text-[var(--text-dark)]">
-                            United State
-                        </td>
-                        <td class="px-6 py-4 text-[#444444] whitespace-nowrap dark:text-[var(--text-dark)]">
-                            13-9-2023 12:11:34
-                        </td>
-                    </tr>
-                    <tr class="bg-white text-[14px] border-b dark:bg-[var(--teriary-dark-hover)] dark:border-gray-700">
-                        <th scope="row" class="px-3 py-4 font-medium text-[#444444] whitespace-nowrap dark:text-[var(--text-dark)]">
-                            LOGIN
-                        </th>
-                        <td class="px-6 py-4 text-[#444444] whitespace-nowrap dark:text-[var(--text-dark)]">
-                            127.0.0.1
-                        </td>
-                        <td class="px-6 py-4 text-[#444444] whitespace-nowrap dark:text-[var(--text-dark)]">
-                            United State
-                        </td>
-                        <td class="px-6 py-4 text-[#444444] whitespace-nowrap dark:text-[var(--text-dark)]">
-                            13-9-2023 12:11:34
-                        </td>
-                    </tr>
-                    <tr class="bg-white text-[14px] border-b dark:bg-[var(--teriary-dark-hover)] dark:border-gray-700">
-                        <th scope="row" class="px-3 py-4 font-medium text-[#444444] whitespace-nowrap dark:text-[var(--text-dark)]">
-                            LOGOUT
-                        </th>
-                        <td class="px-6 py-4 text-[#444444] whitespace-nowrap dark:text-[var(--text-dark)]">
-                            127.0.0.1
-                        </td>
-                        <td class="px-6 py-4 text-[#444444] whitespace-nowrap dark:text-[var(--text-dark)]">
-                            United State
-                        </td>
-                        <td class="px-6 py-4 text-[#444444] whitespace-nowrap dark:text-[var(--text-dark)]">
-                            13-9-2023 12:11:34
-                        </td>
-                    </tr>
-                    <tr class="bg-white text-[14px] border-b dark:bg-[var(--teriary-dark-hover)] dark:border-gray-700">
-                        <th scope="row" class="px-3 py-4 font-medium text-[#444444] whitespace-nowrap dark:text-[var(--text-dark)]">
-                            REGISTER
-                        </th>
-                        <td class="px-6 py-4 text-[#444444] whitespace-nowrap dark:text-[var(--text-dark)]">
-                            127.0.0.1
-                        </td>
-                        <td class="px-6 py-4 text-[#444444] whitespace-nowrap dark:text-[var(--text-dark)]">
-                            United State
-                        </td>
-                        <td class="px-6 py-4 text-[#444444] whitespace-nowrap dark:text-[var(--text-dark)]">
-                            13-9-2023 12:11:34
-                        </td>
-                    </tr>
-
                 </tbody>
             </table>
         </div>
@@ -168,6 +41,22 @@
 </template>
 
 <script setup>
+import { useAuthStore } from '../store/useAuthStore';
+
+const auth = useAuthStore();
+
+const props = defineProps(['user']);
+const {user} = toRefs(props);
+const logs = ref([]);
+
+onMounted(async () => {
+    const { data : fetchLogRes, error : fetchLogError, status } =  await auth.fetchLogs(user.value.id);
+    
+    console.log(fetchLogRes.value.message);
+
+    logs.value = fetchLogRes.value.log;
+
+})
 </script>
 
 <style>
